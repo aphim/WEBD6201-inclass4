@@ -148,7 +148,7 @@
           contact.deserialize(contactData);
 
           data += `<tr>
-          <th scope="row" class="text-center">${index}</th>
+          <th scope="row" class="text center">${index}</th>
           <td>${contact.FullName}</td>
           <td>${contact.ContactNumber}</td>
           <td>${contact.EmailAddress}</td>

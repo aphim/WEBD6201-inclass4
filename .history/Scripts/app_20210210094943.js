@@ -148,7 +148,7 @@
           contact.deserialize(contactData);
 
           data += `<tr>
-          <th scope="row" class="text-center">${index}</th>
+          <th scope="row">${index}</th>
           <td>${contact.FullName}</td>
           <td>${contact.ContactNumber}</td>
           <td>${contact.EmailAddress}</td>
@@ -195,13 +195,6 @@
         $("#fullName").val(contact.FullName);
         $("#contactNumber").val(contact.ContactNumber);
         $("#emailAddress").val(contact.EmailAddress);
-      }
-      else
-      {
-        //modify page for add button instead of edit
-        $("main>h1").text("Add Contact");
-        //modify edit button
-        $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i>Add`);
       }
 
       $("editButton").on("click", function()
