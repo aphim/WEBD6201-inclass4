@@ -118,7 +118,7 @@
     {
       let messageArea = $("#messageArea");
 
-      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\ d{3}[\s.-]\ d{4}$/;
 
       $("#contactNumber").on("blur", function()
       {
@@ -179,8 +179,6 @@
 
             if(contact.serialize())
             {
-              let key = contact.FullName.substring(0, 1) + Date.now();
-
               localStorage.setItem(key, contact.serialize());
             }
           }
@@ -270,9 +268,8 @@
       //form validation
       formValidation();
 
-      $("#editButton").on("click", function()
+      $("editButton").on("click", function()
       {
-        
         if(key == "")
         {
           key = contact.FullName.substring(0, 1) + Date.now();
@@ -283,7 +280,6 @@
         contact.EmailAddress = $("#emailAddress").val();
 
         localStorage.setItem(key, contact.serialize());
-
         location.href = "contact-list.html";
 
       });
@@ -293,6 +289,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {

@@ -293,6 +293,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {

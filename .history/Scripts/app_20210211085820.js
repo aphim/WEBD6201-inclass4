@@ -91,7 +91,7 @@
 
     }
 
-    function testFullName()
+    function displayContact()
     {
       let messageArea = $("#messageArea").hide();
 
@@ -99,10 +99,10 @@
 
       $("#fullName").on("blur", function()
       {
-          if(!fullNamePattern.test($(this).val()))
+          if($(this).val().length < 2)
           {
             $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Name. This must include a Capitalized first name followed by a Capitalized last name");
+            messageArea.show().addClass("alert alert-danger").text("Please enter an appropriate Name");
              
           }
           else
@@ -112,64 +112,6 @@
           }
         });
 
-    }
-
-    function testContactNumber()
-    {
-      let messageArea = $("#messageArea");
-
-      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-
-      $("#contactNumber").on("blur", function()
-      {
-          if(!contactNumberPattern.test($(this).val()))
-          {
-            $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Contact Number. Country code and area code are both optional.");
-             
-          }
-          else
-          {
-            messageArea.removeAttr("class").hide();
-
-          }
-        });
-
-    }
-
-    function testEmailAddress()
-    {
-      let messageArea = $("#messageArea");
-
-      let emailAddressPattern = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
-
-      $("#emailAddress").on("blur", function()
-      {
-          if(!emailAddressPattern.test($(this).val()))
-          {
-            $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter a valid email address");
-             
-          }
-          else
-          {
-            messageArea.removeAttr("class").hide();
-
-          }
-        });
-    }
-
-    function formValidation()
-    {
-      testFullName();
-      testContactNumber();
-      testEmailAddress();
-    }
-
-    function displayContact()
-    {
-      //form validation
-      formValidation();
 
         $("#sendButton").on("click", (event)=>
         {
@@ -179,8 +121,6 @@
 
             if(contact.serialize())
             {
-              let key = contact.FullName.substring(0, 1) + Date.now();
-
               localStorage.setItem(key, contact.serialize());
             }
           }
@@ -189,7 +129,6 @@
         });
 
     }
-
 
     function displayContactList() 
     {
@@ -267,12 +206,8 @@
         $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i>Add`);
       }
 
-      //form validation
-      formValidation();
-
-      $("#editButton").on("click", function()
+      $("editButton").on("click", function()
       {
-        
         if(key == "")
         {
           key = contact.FullName.substring(0, 1) + Date.now();
@@ -283,7 +218,6 @@
         contact.EmailAddress = $("#emailAddress").val();
 
         localStorage.setItem(key, contact.serialize());
-
         location.href = "contact-list.html";
 
       });
@@ -293,6 +227,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {

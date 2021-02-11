@@ -179,8 +179,6 @@
 
             if(contact.serialize())
             {
-              let key = contact.FullName.substring(0, 1) + Date.now();
-
               localStorage.setItem(key, contact.serialize());
             }
           }
@@ -270,7 +268,7 @@
       //form validation
       formValidation();
 
-      $("#editButton").on("click", function()
+      $("editButton").on("click", function()
       {
         
         if(key == "")
@@ -283,7 +281,6 @@
         contact.EmailAddress = $("#emailAddress").val();
 
         localStorage.setItem(key, contact.serialize());
-
         location.href = "contact-list.html";
 
       });
@@ -293,6 +290,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {

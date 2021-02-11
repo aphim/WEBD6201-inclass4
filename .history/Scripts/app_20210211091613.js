@@ -114,11 +114,11 @@
 
     }
 
-    function testContactNumber()
+    testContactNumber()
     {
       let messageArea = $("#messageArea");
 
-      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\ d{3}[\s.-]\ d{4}$/;
 
       $("#contactNumber").on("blur", function()
       {
@@ -137,7 +137,7 @@
 
     }
 
-    function testEmailAddress()
+    testEmailAddress()
     {
       let messageArea = $("#messageArea");
 
@@ -148,7 +148,7 @@
           if(!emailAddressPattern.test($(this).val()))
           {
             $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter a valid email address");
+            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Contact Number. Country code and area code are both optional.");
              
           }
           else
@@ -159,17 +159,11 @@
         });
     }
 
-    function formValidation()
-    {
-      testFullName();
-      testContactNumber();
-      testEmailAddress();
-    }
-
     function displayContact()
     {
       //form validation
-      formValidation();
+      testFullName();
+      testContactNumber();
 
         $("#sendButton").on("click", (event)=>
         {
@@ -179,8 +173,6 @@
 
             if(contact.serialize())
             {
-              let key = contact.FullName.substring(0, 1) + Date.now();
-
               localStorage.setItem(key, contact.serialize());
             }
           }
@@ -268,11 +260,11 @@
       }
 
       //form validation
-      formValidation();
+      testFullName();
+      testContactNumber();
 
-      $("#editButton").on("click", function()
+      $("editButton").on("click", function()
       {
-        
         if(key == "")
         {
           key = contact.FullName.substring(0, 1) + Date.now();
@@ -283,7 +275,6 @@
         contact.EmailAddress = $("#emailAddress").val();
 
         localStorage.setItem(key, contact.serialize());
-
         location.href = "contact-list.html";
 
       });
@@ -293,6 +284,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {

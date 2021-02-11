@@ -114,15 +114,15 @@
 
     }
 
-    function testContactNumber()
+    testContactNumber()
     {
       let messageArea = $("#messageArea");
 
-      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\ d{3}[\s.-]\ d{4}$/;
 
       $("#contactNumber").on("blur", function()
       {
-          if(!contactNumberPattern.test($(this).val()))
+          if(!fullNamePattern.test($(this).val()))
           {
             $(this).trigger("focus").trigger("select");
             messageArea.show().addClass("alert alert-danger").text("Please enter a valid Contact Number. Country code and area code are both optional.");
@@ -137,39 +137,16 @@
 
     }
 
-    function testEmailAddress()
+    testEmailAddress()
     {
-      let messageArea = $("#messageArea");
-
-      let emailAddressPattern = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
-
-      $("#emailAddress").on("blur", function()
-      {
-          if(!emailAddressPattern.test($(this).val()))
-          {
-            $(this).trigger("focus").trigger("select");
-            messageArea.show().addClass("alert alert-danger").text("Please enter a valid email address");
-             
-          }
-          else
-          {
-            messageArea.removeAttr("class").hide();
-
-          }
-        });
-    }
-
-    function formValidation()
-    {
-      testFullName();
-      testContactNumber();
-      testEmailAddress();
+      
     }
 
     function displayContact()
     {
       //form validation
-      formValidation();
+      testFullName();
+      testContactNumber();
 
         $("#sendButton").on("click", (event)=>
         {
@@ -179,8 +156,6 @@
 
             if(contact.serialize())
             {
-              let key = contact.FullName.substring(0, 1) + Date.now();
-
               localStorage.setItem(key, contact.serialize());
             }
           }
@@ -268,11 +243,11 @@
       }
 
       //form validation
-      formValidation();
+      testFullName();
+      testContactNumber();
 
-      $("#editButton").on("click", function()
+      $("editButton").on("click", function()
       {
-        
         if(key == "")
         {
           key = contact.FullName.substring(0, 1) + Date.now();
@@ -283,7 +258,6 @@
         contact.EmailAddress = $("#emailAddress").val();
 
         localStorage.setItem(key, contact.serialize());
-
         location.href = "contact-list.html";
 
       });
@@ -293,6 +267,8 @@
         location.href = "contact-list.html";
       });
     }
+     
+     
 
     function Start()
     {
